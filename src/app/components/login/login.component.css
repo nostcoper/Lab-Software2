@@ -1,0 +1,150 @@
+* {
+    font-family: 'Barlow', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    max-width: 500px;
+    width: 100%;
+    padding: 50px;
+    background: white;
+  }
+  .container .logo {
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    color: #1b1b1b;
+  }
+  
+  input {
+    font-size: 12px;
+    width: 100%;
+    margin: 3px 0;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #555;
+  }
+  input:focus {
+    border-bottom: 2px solid #0067b8;
+  }
+  .login-row,
+  .register-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+  .login-row label,
+  .register-row label {
+    font-size: 12px;
+    margin-right: 10px;
+  }
+  .login-row label input,
+  .register-row input {
+    width: initial;
+    height: initial;
+    transform: translateY(1.5px);
+  }
+  a {
+    text-decoration: none;
+    font-size: 12px;
+    color: #0067b8;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  button {
+    width: 100%;
+    height: 40px;
+    background: black;
+    border: none;
+    outline: none;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  p {
+    font-size: 14px;
+    text-align: center;
+    margin: 15px 0;
+    color: #555;
+  }
+  .login-social {
+    display: flex;
+    justify-content: center;
+  }
+  .login-social a {
+    text-align: center;
+    color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  
+  .login-social a img {
+    height: 40px;
+  }
+  
+  .container .row {
+    position: relative;
+  }
+  .register-form {
+    width: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+  }
+  .register-form.toggle {
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .register-row #register-date {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  @media (max-width: 450px) {
+    .container {
+      padding: 10px;
+      border: none;
+    }
+  }
+
+  .ng-invalid .ng-touched{
+    width: 100%;
+  }
+
+  .alert{
+    color: crimson;
+    font-size: 12px;
+    width: 100%;
+    margin: 0px;
+  }
+  
