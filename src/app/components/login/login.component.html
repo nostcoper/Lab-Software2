@@ -1,83 +1,76 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet"
-  />
-</head>
+<div class="container">
+  <div class="alert-login" *ngIf="incorrectLogin"> 
+    <p>Incorrect email or password.</p>
+    <button (click)="closeAlert()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="logo"></div>
+  <div class="row">
+    <div class="login-form">
+      <h2>Login</h2>
 
-<body>
-  <div class="container">
-    <div class="logo"></div>
-    <div class="row">
-      <div class="login-form">
-        <h2>Login</h2>
+      <form [formGroup]="LoginForm" autocomplete="off">
+        <input formControlName="email" type="email" name="login-ml" id="login-ml" placeholder="Enter Your Email" />
+        <input formControlName="password" type="password" name="login-pw" id="login-pw" placeholder="Enter Your Password"/>
 
-        <form [formGroup]="LoginForm" autocomplete="off">
-          <input formControlName="email" type="email" name="login-ml" id="login-ml" placeholder="Enter Your Email" />
-          <input formControlName="password" type="password" name="login-pw" id="login-pw" placeholder="Enter Your Password"/>
+        <div class="login-row">
+          <a href="#">Forgot Password?</a>
+        </div>
 
-          <div class="login-row">
-            <a href="#">Forgot Password?</a>
-          </div>
+        <button class="submit" (click)="onSubmitLogin()" type="submit">Login</button>
+        <p>login with</p>
+        <div class="login-social">
+          <a (click)="onSubmitFacebook()" id="fb"><img src="./assets/facebook.png" /></a>
+          <a (click)="onSubmitGoogle()" id="gg"><img src="./assets/google.png" /></a>
+          <a (click)="onSubmitTwitter()" id="tw"><img src="./assets/twitter.png" /></a>
+          <a (click)="onSubmitGitHub()" id="gh"><img src="./assets/github.png" /></a>
+        </div>
 
-          <button (click)="onSubmitLogin()" type="submit">Login</button>
-          <p>login with</p>
-          <div class="login-social">
-            <a (click)="onSubmitFacebook()" id="fb"><img src="./assets/facebook.png" /></a>
-            <a (click)="onSubmitGoogle()" id="gg"><img src="./assets/google.png" /></a>
-            <a (click)="onSubmitTwitter()" id="tw"><img src="./assets/twitter.png" /></a>
-            <a (click)="onSubmitGitHub()" id="gh"><img src="./assets/github.png" /></a>
-          </div>
+        <p>
+          Don't have an account? <a class="switch">Register Now</a>
+        </p>
+      </form>     
+    </div>
 
-          <p>
-            Don't have an account? <a href="#" class="switch">Register Now</a>
-          </p>
-        </form>
-      </div>
+    <!-- ----------------------------------------------------Resgister----------------------------------------------------------------- -->
 
-      <!-- ----------------------------------------------------Resgister----------------------------------------------------------------- -->
+    <div class="register-form">
+      <h2>Register</h2>
 
-      <div class="register-form">
-        <h2>Register</h2>
+      <form [formGroup]="RegisterForm" autocomplete="off">
+        <input formControlName="name" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
+        <div class="alert alert-danger" [hidden]="RegisterForm.get('name')?.valid || RegisterForm.get('name')?.pristine">
+          <span *ngIf="RegisterForm.get('name')?.errors?.['required']"> El nombre es obligatorio </span>
+        </div>
 
-        <form [formGroup]="RegisterForm" autocomplete="off">
-          <input formControlName="name" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
-          <div class="alert alert-danger" [hidden]="RegisterForm.get('name')?.valid || RegisterForm.get('name')?.pristine">
-            <span *ngIf="RegisterForm.get('name')?.errors?.['required']"> El nombre es obligatorio </span>
-          </div>
+        <input formControlName="email" type="email" name="register-ml" id="register-ml" placeholder="Ingrese su correo" />
+        <div class="alert alert-danger" [hidden]="RegisterForm.get('email')?.valid || RegisterForm.get('email')?.pristine">
+          <span *ngIf="RegisterForm.get('email')?.errors?.['required']"> El email es obligatorio </span>
+          <span *ngIf="RegisterForm.get('email')?.errors?.['email']"> El email es inválido </span>
+        </div>
 
-          <input formControlName="email" type="email" name="register-ml" id="register-ml" placeholder="Ingrese su correo" />
-          <div class="alert alert-danger" [hidden]="RegisterForm.get('email')?.valid || RegisterForm.get('email')?.pristine">
-            <span *ngIf="RegisterForm.get('email')?.errors?.['required']"> El email es obligatorio </span>
-            <span *ngIf="RegisterForm.get('email')?.errors?.['email']"> El email es inválido </span>
-          </div>
+        <input formControlName="password" type="password" name="register-pw" id="register-pw" placeholder="Ingrese su Contraseña"/>
+        <div class="alert alert-danger" [hidden]=" RegisterForm.get('password')?.valid || RegisterForm.get('password')?.pristine">
+          <span *ngIf="RegisterForm.get('password')?.errors?.['required']"> La contraseña es obligatoria </span>
+          <span *ngIf="RegisterForm.get('password')?.errors?.['pattern']"> La contraseña es inválida </span>
+        </div>
 
-          <input formControlName="password" type="password" name="register-pw" id="register-pw" placeholder="Ingrese su Contraseña"/>
-          <div class="alert alert-danger" [hidden]=" RegisterForm.get('password')?.valid || RegisterForm.get('password')?.pristine">
-            <span *ngIf="RegisterForm.get('password')?.errors?.['required']"> La contraseña es obligatoria </span>
-            <span *ngIf="RegisterForm.get('password')?.errors?.['pattern']"> La contraseña es inválida </span>
-          </div>
-
-          <input formControlName="passwordConfirm" type="password" name="register-cfpw" id="register-cfpw" placeholder="Confirm Your Password"/>
-          <div class="alert alert-danger" [hidden]="RegisterForm.get('passwordConfirm')?.pristine">
-            <span *ngIf="RegisterForm.errors?.['matchError'] "> La contraseña no coincide </span>
-          </div>
-          <button (click)="onSubmitRegister()" [disabled]="RegisterForm.invalid" >Register</button>
-          <p>Register with</p>
-          <div class="login-social">
-            <a (click)="onSubmitFacebook()" id="fb"><img src="./assets/facebook.png" /></a>
-            <a (click)="onSubmitGoogle()" id="gg"><img src="./assets/google.png" /></a>
-            <a (click)="onSubmitTwitter()" id="tw"><img src="./assets/twitter.png" /></a>
-            <a (click)="onSubmitGitHub()" id="gh"><img src="./assets/github.png" /></a>
-          </div>
-          <p>You have an account? <a href="#" class="switch">Login Now</a></p>
-        </form>
-      </div>
+        <input formControlName="passwordConfirm" type="password" name="register-cfpw" id="register-cfpw" placeholder="Confirm Your Password"/>
+        <div class="alert alert-danger" [hidden]="RegisterForm.get('passwordConfirm')?.pristine">
+          <span *ngIf="RegisterForm.errors?.['matchError'] "> La contraseña no coincide </span>
+        </div>
+        <button class="submit" (click)="onSubmitRegister()" [disabled]="RegisterForm.invalid" >Register</button>
+        
+        <p>Register with</p>
+        <div class="login-social">
+          <a (click)="onSubmitFacebook()" id="fb"><img src="./assets/facebook.png" /></a>
+          <a (click)="onSubmitGoogle()" id="gg"><img src="./assets/google.png" /></a>
+          <a (click)="onSubmitTwitter()" id="tw"><img src="./assets/twitter.png" /></a>
+          <a (click)="onSubmitGitHub()" id="gh"><img src="./assets/github.png" /></a>
+        </div>
+        <p>You have an account? <a class="switch">Login Now</a></p>
+      </form>
     </div>
   </div>
-</body>
+</div>
