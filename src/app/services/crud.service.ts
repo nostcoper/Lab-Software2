@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore} from '@angular/fire/firestore'
+import { Firestore, collectionData} from '@angular/fire/firestore'
 import { UserData } from '../interfaces/user';
 import { addDoc, collection } from 'firebase/firestore';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,4 +19,10 @@ export class CrudService {
     }
     return addDoc(userRef, data);
   }
+
+  getPlaces(): Observable<UserData[]>{
+    const userRef = collection(this.firestore, 'Users');
+    return collectionData(userRef, {idField: 'id'}) as Observable<UserData[]>
+}
+
 }
