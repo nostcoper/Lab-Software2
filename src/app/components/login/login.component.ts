@@ -7,6 +7,7 @@ import { User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { state } from '@angular/animations';
 import { timeout, timer } from 'rxjs';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,7 @@ export class LoginComponent implements OnInit {
 
   public passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?!.*\s).{8,}$/;
   incorrectLogin: boolean = false;
-
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private crudApi: CrudService, private userService: UserService, private router: Router) { }
 
   LoginForm = new FormGroup({
     'email': new FormControl('', [Validators.required,  Validators.email]),
@@ -34,12 +34,15 @@ export class LoginComponent implements OnInit {
   }, {validators: matchpassword});
 
   onSubmitRegister() {
+
+
     this.userService.register(this.RegisterForm.value)
       .then(Response=> {
         this.userService.verfication(Response)
+        this.crudApi.addPlace(this.RegisterForm.value);
         alert("Se ha enviado correo de confirmación")
       })
-      .catch(error => {});
+      .catch(error => { alert(error.code)});
   }
 
   onSubmitLogin() {
@@ -85,12 +88,12 @@ export class LoginComponent implements OnInit {
       .then(response => {
         this.routeToDashboard(response);
       })
-
       .catch(error => console.log(error));
   }
 
   routeToDashboard(response: any){
-    this.router.navigate(['/dashboard'],{ queryParams: { displayName: response.user.displayName } });
+    this.userService.isLogged = true
+    this.router.navigate(['/dashboard'],{ queryParams: { displayName: response.user.displayName, photo: response.user.providerData['0'].photoURL} });
   }
 
   openAlert(){

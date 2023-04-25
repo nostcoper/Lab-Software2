@@ -28,14 +28,16 @@
 
 .sidebar__logo {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 40px 0 56px 0px;
+    margin: 40px 0 40px 0px;
 }
 
 .sidebar__logo-header {
     color: black;
-   
+    text-align: center;
+    margin-top: 10px;
+    bottom: 0px;
     }
 
 .side-nav {
@@ -139,8 +141,9 @@
 }
 
 .user-image {
-    height: 44px;
-    width: 44px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
 }
 
 /* -------------- NOTIFICATION -------------- */

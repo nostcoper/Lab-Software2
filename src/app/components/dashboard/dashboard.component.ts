@@ -8,12 +8,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DashboardComponent {
   displayName = ""
+  photo = ""
   constructor(private router: ActivatedRoute) { 
   }
 
   ngOnInit() {
     this.router.queryParams.subscribe(params => {
       this.displayName = params['displayName'];
+      this.photo = params['photo'];
     });
   }
 }
