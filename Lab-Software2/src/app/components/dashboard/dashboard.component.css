@@ -180,7 +180,6 @@
     gap: 24px;
     padding: 32px;
     background-color: #e1e1e1;
-    height: 100%;
 }
 
 .box {
@@ -191,7 +190,7 @@
 }
 
 .bottom-container__left {
-    width: 100%;
+    width: 70%;
 }
 
 .bottom-container__right {
@@ -225,7 +224,6 @@
 .section-header {
     line-height: 24px;
     font-size: 16px;
-    font-weight: 800;
 }
 
 .header-container span {
@@ -318,7 +316,7 @@ tr > th {
     font-size: 12px;
     line-height: 150%;
     color: #90A3BF;
-    padding-bottom: 15px;
+    padding-bottom: 24px;
 }
 
 tr > td {

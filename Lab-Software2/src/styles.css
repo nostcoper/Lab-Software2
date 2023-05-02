@@ -1,0 +1,29 @@
+* {
+  font-family: 'Barlow', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+input {
+font-size: 12px;
+width: 100%;
+margin: 3px 0;
+height: 40px;
+border: none;
+outline: none;
+border-bottom: 2px solid #555;
+}
+
+input:focus {
+border-bottom: 2px solid #0067b8;
+}
