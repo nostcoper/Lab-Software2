@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData} from '@angular/fire/firestore'
+import { Firestore, collectionData, doc, deleteDoc} from '@angular/fire/firestore'
 import { UserData } from '../interfaces/user';
 import { addDoc, collection } from 'firebase/firestore';
 import { Observable } from 'rxjs';
@@ -24,5 +24,9 @@ export class CrudService {
     const userRef = collection(this.firestore, 'Users');
     return collectionData(userRef, {idField: 'id'}) as Observable<UserData[]>
 }
+  deletePlaces(user: UserData){
+    const userRef = doc(this.firestore, `Users/${user.id}`);
+    return deleteDoc(userRef)
+  }
 
 }

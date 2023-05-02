@@ -573,3 +573,26 @@ tr > td:first-child {
         font-size: 15px;
     }
 }
+
+button{
+
+    background: none;
+    border: none;
+    padding-left: 10px;
+}
+.tools{
+    text-align: right;
+}
+
+.confirmDelete{
+    border: solid;
+}
+
+.btn-delete{
+    color: crimson;
+}
+
+.btn-confirm{
+    font-weight: 800;
+    color: green;
+}

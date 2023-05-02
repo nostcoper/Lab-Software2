@@ -3,7 +3,7 @@
   <nav class="sidebar">
     <div>
       <div class="sidebar__logo">
-        <img class="user-image" src={{photo}}>
+        <img class="user-image" src="{{photo}}">
         <h2 class="sidebar__logo-header">{{displayName}}</h2>
       </div>
       <ul class="side-nav">
@@ -51,10 +51,20 @@
               <th>Name</th>
               <th>Email</th>
             </tr>
-            <tr *ngFor = " let user of usersData">
+            <tr *ngFor = " let user of usersData; let i = index" [attr.data-user-id]="user.id"[class.confirmDelete] = isDelete>
               <td>{{user.id}}</td>
               <td>{{user.name}}</td>
               <td>{{user.email}}</td>
+              <td>
+                <div class="tools" [hidden]="isDelete">
+                <button><mat-icon>edit</mat-icon></button>
+                <button class= "btn-delete" (click)="deleteUser()"><mat-icon>delete</mat-icon></button>
+                </div>
+                <div class="tools" [hidden]="!isDelete">
+                  <button  class=  "btn-confirm"><mat-icon>check</mat-icon></button>
+                  <button> <mat-icon>block</mat-icon></button>
+                </div>
+              </td>
             </tr>
           </table>
         </div>

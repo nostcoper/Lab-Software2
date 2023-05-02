@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
       .then(Response=> {
         this.userService.verfication(Response)
         this.crudApi.addPlace(this.RegisterForm.value);
-        alert("Se ha enviado correo de confirmación")
+        let registerForm = document.querySelector('.register-form');
+        registerForm?.classList.toggle('toggle');
       })
       .catch(error => { alert(error.code)});
   }
@@ -93,7 +94,8 @@ export class LoginComponent implements OnInit {
 
   routeToDashboard(response: any){
     this.userService.isLogged = true
-    this.router.navigate(['/dashboard'],{ queryParams: { displayName: response.user.displayName, photo: response.user.providerData['0'].photoURL} });
+    alert(response.user.providerData['0'].photoURL)
+    this.router.navigate(['/dashboard'],{ queryParams: { displayName:response.user.displayName, photo:response.user.providerData['0'].photoURL} });
   }
 
   openAlert(){
@@ -117,5 +119,4 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
 }

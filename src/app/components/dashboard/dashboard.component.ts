@@ -13,6 +13,7 @@ export class DashboardComponent {
   displayName = ""
   photo = ""
   usersData: UserData[]
+  isDelete= false
   constructor(private activatedrouter: ActivatedRoute, private crudAPI: CrudService, private userService: UserService, private router: Router) { 
   }
 
@@ -21,13 +22,28 @@ export class DashboardComponent {
     this.activatedrouter.queryParams.subscribe(params => {
       this.displayName = params['displayName'];
       this.photo = params['photo'];
+      alert(this.photo)
     });
   }
 
+  deleteUser() {
+    this.isDelete = true
+  }
+
+  async confirmDelete(user: any, index: any){
+    let rowUser = document.querySelector(`tr[data-user-id="${user.id}"]`);
+    const reponse = await this.crudAPI.deletePlaces(user);
+    console.log(reponse)
+    if (rowUser) {
+      rowUser.parentNode?.removeChild(rowUser);
+    }
+  }
   logout(){
     this.userService.logout().then(response => {
       this.router.navigate([''])
     })
     
+  
+
   }
 }
