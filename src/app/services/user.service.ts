@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, TwitterAuthProvider} from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { sendEmailVerification } from 'firebase/auth';
 import { UserCredential } from 'firebase/auth';
 
@@ -11,7 +12,7 @@ import { UserCredential } from 'firebase/auth';
 export class UserService {
   public isLogged = false;
 
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private router: Router) {
    }
   
   register({email, password}: any){
@@ -43,6 +44,10 @@ export class UserService {
   }
 
   isLoggedIn() {
-    return this.isLogged
-}
+    return this.isLogged;
+  }
+
+  logout(){
+   return this.auth.signOut();
+  }
 }

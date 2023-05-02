@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserData } from 'src/app/interfaces/user';
 import { CrudService } from 'src/app/services/crud.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +12,22 @@ import { CrudService } from 'src/app/services/crud.service';
 export class DashboardComponent {
   displayName = ""
   photo = ""
-  constructor(private router: ActivatedRoute, private crudAPI: CrudService) { 
+  usersData: UserData[]
+  constructor(private activatedrouter: ActivatedRoute, private crudAPI: CrudService, private userService: UserService, private router: Router) { 
   }
 
   ngOnInit() {
-    this.crudAPI.getPlaces().subscribe(users => {console.log(users)})
-    this.router.queryParams.subscribe(params => {
+    this.crudAPI.getPlaces().subscribe(users => {this.usersData = users})
+    this.activatedrouter.queryParams.subscribe(params => {
       this.displayName = params['displayName'];
       this.photo = params['photo'];
     });
+  }
+
+  logout(){
+    this.userService.logout().then(response => {
+      this.router.navigate([''])
+    })
+    
   }
 }
