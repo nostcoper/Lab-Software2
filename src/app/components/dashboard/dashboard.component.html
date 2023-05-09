@@ -51,18 +51,31 @@
               <th>Name</th>
               <th>Email</th>
             </tr>
-            <tr *ngFor = " let user of usersData; let i = index" [attr.data-user-id]="user.id"[class.confirmDelete] = isDelete>
-              <td>{{user.id}}</td>
-              <td>{{user.name}}</td>
-              <td>{{user.email}}</td>
+            <tr *ngFor = " let user of usersData; let i = index">
               <td>
-                <div class="tools" [hidden]="isDelete">
-                <button><mat-icon>edit</mat-icon></button>
-                <button class= "btn-delete" (click)="deleteUser()"><mat-icon>delete</mat-icon></button>
+                <div>{{user.id}}</div>
+              </td>
+              <td>
+                <div   [hidden]="user.isEdit">{{user.name}}</div>
+                <input [hidden]="!user.isEdit" [(ngModel)]="user.name">
+              </td>
+              <td>
+                <div [hidden]="user.isEdit"> {{user.email}}</div>
+                <input [hidden]="!user.isEdit" [(ngModel)]="user.email">
+              </td>
+
+              <td>
+                <div class="tools" [hidden]="user.isDelete || user.isEdit">
+                <button (click)="edit(user)"><mat-icon>edit</mat-icon></button>
+                <button class= "btn-delete" (click)="delete(user)"><mat-icon>delete</mat-icon></button>
                 </div>
-                <div class="tools" [hidden]="!isDelete">
-                  <button  class=  "btn-confirm"><mat-icon>check</mat-icon></button>
-                  <button> <mat-icon>block</mat-icon></button>
+                <div class="tools" [hidden]="!user.isDelete">
+                  <button  class=  "btn-confirm" (click)="confirmDelete(user)"><mat-icon>check</mat-icon></button>
+                  <button  (click)="cancelDelete(user)"> <mat-icon>block</mat-icon></button>
+                </div>
+                <div class="tools" [hidden]="!user.isEdit">
+                  <button  class=  "btn-confirm" (click)="confirmEdit(user)"><mat-icon>check</mat-icon></button>
+                  <button  (click)="cancelEdit(user)" > <mat-icon>block</mat-icon></button>
                 </div>
               </td>
             </tr>

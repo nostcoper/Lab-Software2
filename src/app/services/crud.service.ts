@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collectionData, doc, deleteDoc} from '@angular/fire/firestore'
 import { UserData } from '../interfaces/user';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +12,7 @@ import { Observable } from 'rxjs';
 
 export class CrudService {
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private userService: UserService) { }
   addPlace({name, email}: any){
     const userRef = collection(this.firestore, 'Users');
     const data: UserData = {
@@ -29,4 +31,12 @@ export class CrudService {
     return deleteDoc(userRef)
   }
 
+  updatePlace(id:string, name:string, email:string) {
+    const userRef = doc(this.firestore, 'Users', id); 
+    const data = {
+      name: name,
+      email: email,
+    };
+     return updateDoc(userRef, data);
+  }
 }

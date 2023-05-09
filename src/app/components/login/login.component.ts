@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
   }, {validators: matchpassword});
 
   onSubmitRegister() {
-
-
     this.userService.register(this.RegisterForm.value)
       .then(Response=> {
         this.userService.verfication(Response)
@@ -94,7 +92,6 @@ export class LoginComponent implements OnInit {
 
   routeToDashboard(response: any){
     this.userService.isLogged = true
-    alert(response.user.providerData['0'].photoURL)
     this.router.navigate(['/dashboard'],{ queryParams: { displayName:response.user.displayName, photo:response.user.providerData['0'].photoURL} });
   }
 
