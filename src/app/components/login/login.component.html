@@ -39,7 +39,7 @@
       <h2>Register</h2>
 
       <form [formGroup]="RegisterForm" autocomplete="off">
-        <input formControlName="name" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
+        <input formControlName="name" type="text" name="register-name" id="register-name" placeholder=" Ingrese su nombre"/>
         <div class="alert alert-danger" [hidden]="RegisterForm.get('name')?.valid || RegisterForm.get('name')?.pristine">
           <span *ngIf="RegisterForm.get('name')?.errors?.['required']"> El nombre es obligatorio </span>
         </div>

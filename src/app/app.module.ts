@@ -15,6 +15,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthGuard } from './guards/auth.guard';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import * as admin from 'firebase-admin';
+
+const myRefreshToken = 'lab-software-2-firebase-adminsdk-6mgjg-0d12f8218b.json'; 
+
+admin.initializeApp({
+  credential: admin.credential.cert(myRefreshToken),
+  databaseURL: 'https://lab-software-2.firebaseio.com'
+});
 
 @NgModule({
   declarations: [

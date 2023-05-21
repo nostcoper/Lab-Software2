@@ -15,10 +15,11 @@ export class DashboardComponent {
   displayName = ""
   photo = ""
   usersData: any
+  isCreate: boolean = true
   constructor(private activatedrouter: ActivatedRoute, private crudAPI: CrudService, private userService: UserService, private router: Router) { 
   }
 
-  editForm = new FormGroup({
+  createForm = new FormGroup({
     'name': new FormControl('', [Validators.required]),
     'email': new FormControl('', [Validators.required,  Validators.email]),
   });
@@ -71,8 +72,6 @@ export class DashboardComponent {
     this.userService.logout().then(response => {
       this.router.navigate([''])
     })
-    
-  
-
   }
+
 }

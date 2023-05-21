@@ -44,7 +44,14 @@
         <div class="box transaction-box">
           <div class="header-container">
             <h3 class="section-header">Users</h3>
+            <button class="btn-create">Create</button>
           </div>
+            <form class="create" [formGroup]="createForm" autocomplete="off">
+              <input class='input-create' formControlName="name" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
+              <input class='input-create' formControlName="email" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
+              <button class="btn-create">submit</button>
+              <button class="btn-create">cancel</button>
+            </form>
           <table class="transaction-history">
             <tr>
               <th>ID</th>

@@ -609,3 +609,37 @@ input {
     padding: 8px 0;
 
     }
+
+    .create{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .btn-create{
+        border-radius: 5px;
+        width: 100px;
+        height: 40px;
+        background: black;
+        border: none;
+        outline: none;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        cursor: pointer;
+    }
+
+    .input-create {
+        font-size: 12px;
+        width: 40%;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: -2%;
+        padding: 8px 0;
+        text-indent: 10px; 
+    
+        }

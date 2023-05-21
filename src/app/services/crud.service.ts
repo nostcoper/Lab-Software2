@@ -4,6 +4,7 @@ import { UserData } from '../interfaces/user';
 import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { firebaseAdmin } from '../../../firebase.config';
 
 @Injectable({
   providedIn: 'root'
@@ -39,4 +40,5 @@ export class CrudService {
     };
      return updateDoc(userRef, data);
   }
+
 }
