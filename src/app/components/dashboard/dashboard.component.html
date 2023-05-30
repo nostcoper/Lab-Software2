@@ -44,14 +44,16 @@
         <div class="box transaction-box">
           <div class="header-container">
             <h3 class="section-header">Users</h3>
-            <button class="btn-create">Create</button>
-          </div>
+            <button (click)="create()" class="btn-create">Create</button>
+          </div> 
+          <div [hidden]="isCreate">
             <form class="create" [formGroup]="createForm" autocomplete="off">
-              <input class='input-create' formControlName="name" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
-              <input class='input-create' formControlName="email" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
-              <button class="btn-create">submit</button>
+              <input class= 'input-create' formControlName="name" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
+              <input class= 'input-create' formControlName="email" type="text" name="register-name" id="register-name" placeholder="Ingrese su nombre"/>
+              <button (click)="registerUser()" class="btn-create">submit</button>
               <button class="btn-create">cancel</button>
             </form>
+          </div>
           <table class="transaction-history">
             <tr>
               <th>ID</th>
@@ -64,11 +66,11 @@
               </td>
               <td>
                 <div   [hidden]="user.isEdit">{{user.name}}</div>
-                <input [hidden]="!user.isEdit" [(ngModel)]="user.name">
+                <input [hidden]="!user.isEdit" [(ngModel)]="nameOnEdit">
               </td>
               <td>
                 <div [hidden]="user.isEdit"> {{user.email}}</div>
-                <input [hidden]="!user.isEdit" [(ngModel)]="user.email">
+                <input [hidden]="!user.isEdit" [(ngModel)]="emailOnEdit">
               </td>
 
               <td>

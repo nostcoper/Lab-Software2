@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, TwitterAuthProvider, getAuth} from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { sendEmailVerification } from 'firebase/auth';
+import { sendEmailVerification, sendPasswordResetEmail } from 'firebase/auth';
 import { UserCredential } from 'firebase/auth';
 
 @Injectable({
@@ -41,6 +41,9 @@ export class UserService {
 
   verfication(UserCredential: UserCredential){
     return sendEmailVerification(UserCredential.user);
+  }
+  updatePassword(email: any){
+    return sendPasswordResetEmail(this.auth, email)
   }
 
   isLoggedIn() {

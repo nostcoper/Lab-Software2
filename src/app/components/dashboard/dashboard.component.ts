@@ -5,6 +5,7 @@ import { CrudService } from 'src/app/services/crud.service';
 import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,9 +13,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 
 export class DashboardComponent {
+  
   displayName = ""
   photo = ""
   usersData: any
+  nameOnEdit= ""
+  emailOnEdit = ""
   isCreate: boolean = true
   constructor(private activatedrouter: ActivatedRoute, private crudAPI: CrudService, private userService: UserService, private router: Router) { 
   }
@@ -46,12 +50,12 @@ export class DashboardComponent {
 
   edit(user: any){
     user.isEdit = true
+    this.nameOnEdit= user.name
+    this.emailOnEdit = user.email
   }
 
   async confirmDelete(user: any){
-     // const reponse = await this.crudAPI.deletePlaces(user);
-      //console.log(reponse)
-      console.log(this.userService.deleteUser(user.id))
+    const reponse = await this.crudAPI.deletePlaces(user);
   }
   
   cancelDelete(user: any){
@@ -60,6 +64,8 @@ export class DashboardComponent {
   
   async confirmEdit(user: any){
     user.isEdit = false
+    user.name = this.nameOnEdit
+    user.email = this.emailOnEdit
     const reponse = await this.crudAPI.updatePlace(user.id  ,user.name, user.email);
     console.log(reponse)
 }
@@ -74,4 +80,21 @@ export class DashboardComponent {
     })
   }
 
+  create(){
+    this.isCreate = !this.isCreate;
+  }
+
+  registerUser(){
+    this.userService.register({email:  this.createForm.value.email, password: "password"})
+    .then(Response=> {
+      this.crudAPI.addPlace({name: this.createForm.value.name, email:  this.createForm.value.email})
+      this.userService.updatePassword(this.createForm.value.email)
+      .then(Response=>{
+        this.isCreate = !this.isCreate;
+        this.createForm.reset()
+      })
+    })
+
+    .catch(error => { alert(error.code)});
+  }
 }
